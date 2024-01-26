@@ -7,11 +7,12 @@ const path = require("path");
 const cp = require("child_process");
 
 const getCurrentRecordId = () => {
-  //https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
   const { status, stdout } = cp.spawnSync("curl", [
     ...["--header", `Authorization: Bearer ${process.env.INPUT_TOKEN}`],
     ...["--header", "Content-Type: application/json"],
-    `https://api.cloudflare.com/client/v4/zones/${process.env.INPUT_ZONE}/dns_records`,
+    `https://api.cloudflare.com/client/v4/zones?name=${encodeURIComponent(
+      process.env.INPUT_NAME
+    )}`,
   ]);
 
   if (status !== 0) {
@@ -25,18 +26,16 @@ const getCurrentRecordId = () => {
     process.exit(1);
   }
 
-  const name = process.env.INPUT_NAME;
-  const record = result.find((x) => x.name === name);
+  const zone = result.find((x) => x.name === process.env.INPUT_NAME);
 
-  if (!record) {
-    return null
+  if (!zone) {
+    return null;
   }
 
-  return record.id;
+  return zone.id;
 };
 
 const createRecord = () => {
-  // https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record
   const { status, stdout } = cp.spawnSync("curl", [
     ...["--request", "POST"],
     ...["--header", `Authorization: Bearer ${process.env.INPUT_TOKEN}`],
@@ -69,7 +68,6 @@ const createRecord = () => {
 
 const updateRecord = (id) => {
   console.log(`Record exists with ${id}, updating...`);
-  // https://api.cloudflare.com/#dns-records-for-a-zone-update-dns-record
   const { status, stdout } = cp.spawnSync("curl", [
     ...["--request", "PUT"],
     ...["--header", `Authorization: Bearer ${process.env.INPUT_TOKEN}`],
@@ -99,11 +97,11 @@ const updateRecord = (id) => {
 
   console.log(`::set-output name=record_id::${result.id}`);
   console.log(`::set-output name=name::${result.name}`);
-}
+};
 
 const id = getCurrentRecordId();
 if (id) {
   updateRecord(id);
-  process.exit(0);
+} else {
+  createRecord();
 }
-createRecord();
