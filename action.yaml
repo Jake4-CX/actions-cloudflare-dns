@@ -1,6 +1,6 @@
 name: "CloudFlare DNS record management via API"
 description: "Creates and updates  CloudFlare DNS records"
-author: "rez0n"
+author: "rafaelperoco"
 
 inputs:
   type:
