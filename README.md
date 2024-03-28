@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: jake4/actions-cloudflare-dns@v1.0.0
+      - uses: Jake4-CX/actions-cloudflare-dns@v1.0.0
         with:
           type: "A"
           name: "review.example.com"
