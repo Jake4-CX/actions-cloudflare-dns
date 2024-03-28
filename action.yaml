@@ -1,4 +1,4 @@
-name: "CloudFlare DNS record management via API"
+name: "CloudFlare DNS record management via v4 API (Create & Update)"
 description: "Creates and updates  CloudFlare DNS records"
 author: "Jake4"
 
