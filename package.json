@@ -1,0 +1,35 @@
+{
+  "name": "actions-cloudflare-dns",
+  "version": "1.0.0",
+  "description": "Creates a new CloudFlare DNS record.",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc && ncc build lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jake4-CX/actions-cloudflare-dns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jake4-CX/actions-cloudflare-dns/issues"
+  },
+  "homepage": "https://github.com/Jake4-CX/actions-cloudflare-dns#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^6.0.0",
+    "@vercel/ncc": "^0.38.1",
+    "axios": "^1.6.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  }
+}

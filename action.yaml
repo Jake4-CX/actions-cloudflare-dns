@@ -1,6 +1,6 @@
 name: "CloudFlare DNS record management via API"
 description: "Creates and updates  CloudFlare DNS records"
-author: "rafaelperoco"
+author: "Jake4"
 
 inputs:
   type:
@@ -13,24 +13,25 @@ inputs:
     description: 'DNS record content, e.g. "127.0.0.1"'
   ttl:
     description: "Time to live for DNS record. Value of 1 is 'automatic'"
-    default: 1
+    default: "1"
   proxied:
     description: "Whether the record is receiving the performance and security benefits of Cloudflare"
-    default: true
+    default: "true"
   token:
     description: "CloudFlare API token"
     required: true
   zone:
+    description: "CloudFlare zone"
     default: "CloudFlare zone"
     required: true
 outputs:
   record_id:
     description: "Record ID"
   name:
-    description: 'Affected domain name'
+    description: "Affected domain name"
 runs:
   using: "node12"
-  main: "main.js"
+  main: "dist/index.js"
 
 branding:
   icon: "cloud"
